@@ -18,8 +18,9 @@ public class WhiteboardPen : VRTK_InteractableObject {
 	}
 
 	// Update is called once per frame
-	void Update () {
-		float tipHeight = transform.Find ("Tip").transform.localScale.y;
+	void Update ()
+	{
+		float tipHeight = 10;//transform.Find ("Tip").transform.localScale.y;
 		Vector3 tip = transform.Find ("Tip/TouchPoint").transform.position;
 
 		Debug.Log (tip);
@@ -32,6 +33,8 @@ public class WhiteboardPen : VRTK_InteractableObject {
 		if (Physics.Raycast (tip, transform.up, out touch, tipHeight)) {
 			if (!(touch.collider.tag == "Whiteboard")) return;
     		this.whiteboard = touch.collider.GetComponent<Whiteboard>();
+            
+            whiteboard.SetPenSize(Vector3.Distance(tip,touch.point));
 
 			// Give haptic feedback when touching the whiteboard
 			controllerActions.TriggerHapticPulse (0.05f);
@@ -53,7 +56,7 @@ public class WhiteboardPen : VRTK_InteractableObject {
 
 		// Lock the rotation of the pen if "touching"
 		if (lastTouch) {
-			transform.rotation = lastAngle;
+//			transform.rotation = lastAngle;
 		}
 	}
 

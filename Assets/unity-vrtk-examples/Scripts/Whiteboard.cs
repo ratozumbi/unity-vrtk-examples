@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -63,5 +64,10 @@ public class Whiteboard : MonoBehaviour {
 
 	public void SetColor(Color color) {
 		this.color = Enumerable.Repeat<Color>(color, penSize * penSize).ToArray<Color>();
+	}
+
+	public void SetPenSize(float value)
+	{
+		penSize = Convert.ToInt32(value * 200);
 	}
 }
